@@ -46,13 +46,13 @@ export default class Dropdown1 extends React.Component {
         clouds:{
           all:"Loading...",
         },
-        //uses a number as the beginning of theobject name for rain and snow 3 hour volumes
-        //rain:{
-        //  3h:"Loading...",
-        //},
-        //snow:{
-        //  3h:"Loading...",
-        //},
+// Uses a number as the beginning of the object name for rain and snow 3 hour volumes
+//        rain:{
+//          3h:"Loading...",
+//        },
+//        snow:{
+//          3h:"Loading...",
+//        },
         dt:"Loading...",
         sys:{
           type:"Loading...",
@@ -77,24 +77,22 @@ export default class Dropdown1 extends React.Component {
 
   componentDidMount(){
       axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.testVar}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
-          this.setState({
-              data:response.data
-          })
+        response.data.main.temp = Math.floor((this.state.data.main.temp - 273.15)* 1.8000 + 32.00)
+        this.setState({
+          data:response.data
+        })
       })
   }
   
   handleClick(somecityy) {
-      this.setState({
-          testVar:somecityy
-      })
+    this.setState({
+      testVar:somecityy
+    })
   }
 
   render() {
-      if(this.state.data.main.temp !== "Loading..."){
-        this.state.data.main.temp = Math.floor((this.state.data.main.temp - 273.15)* 1.8000 + 32.00)
-      }
       if(this.state.testVar !== "placeholder"){
-        //possily change this to this.setState in the future
+// Is there a better way to make this table?
           this.tableThing = <Table>
           <thead>
             <tr>
@@ -115,28 +113,30 @@ export default class Dropdown1 extends React.Component {
             </tr>
           </tbody>
         </Table>
-        //somehow need to get rid of this
+// Somehow need to get rid of this
           this.componentDidMount()
       }
-      for(var key in this.state.data){
-        if(!this.state.data[key]){
-          this.state.data[key] = "Unavailable"
-        } else {
-          for(var key2 in this.state.data[key]){
-            if(!this.state.data[key][key2]){
-              this.state.data[key][key2] = "Unavailable"
-            }
-          }
-        }
-      }
+// Need to somehow do this using setState instead of redfining the current object
+//      for(var key in this.state.data){
+//        if(!this.state.data[key]){
+//          this.state.data[key] = "Unavailable"
+//        } else {
+//          for(var key2 in this.state.data[key]){
+//            if(!this.state.data[key][key2]){
+//              this.state.data[key][key2] = "Unavailable"
+//            }
+//          }
+//        }
+//      }
     return (
-        <div>
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret>
-          Dropdown
-        </DropdownToggle>
+      <div>
+        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle caret>
+            Dropdown
+          </DropdownToggle>
         <div>{this.testVar}</div>
         <DropdownMenu>
+{/*Some way to automate making this dropdownlist?*/}
           <DropdownItem header>City</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("anaconda")}>Anaconda</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("baker")}>Baker</DropdownItem>
@@ -169,7 +169,7 @@ export default class Dropdown1 extends React.Component {
         </DropdownMenu>
       </Dropdown>
       <p>{this.tableThing}</p>
-      </div>
+    </div>
     );
   }
 }
