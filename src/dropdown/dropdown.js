@@ -12,7 +12,6 @@ import { Table } from 'reactstrap';
 export default class Dropdown1 extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.tableThing = ""
