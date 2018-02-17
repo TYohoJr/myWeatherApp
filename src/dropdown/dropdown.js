@@ -1,7 +1,7 @@
 // Only the first 4 cities in the dropdown are currently active
 // The rest are placeholders for now
 // Use this URL to make sure the API is working - http://api.openweathermap.org/data/2.5/weather?q=bozeman&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb
-
+//testing
 
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -92,7 +92,7 @@ export default class Dropdown1 extends React.Component {
 
   render() {
       if(this.state.data.main.temp !== "Loading..."){
-          this.state.data.main.temp = Math.floor((this.state.data.main.temp - 273.15)* 1.8000 + 32.00)
+        this.state.data.main.temp = Math.floor((this.state.data.main.temp - 273.15)* 1.8000 + 32.00)
       }
       if(this.state.testVar !== "placeholder"){
         //possily change this to this.setState in the future

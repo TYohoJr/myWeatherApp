@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Jumbotron, Button } from 'reactstrap';
 import axios from "axios";
-import Dropdown1 from "./dropdown.js";
+import Dropdown1 from "../dropdown/dropdown.js";
 
 export default class App extends Component {
   constructor(){
