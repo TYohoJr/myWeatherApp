@@ -1,5 +1,6 @@
 // Only the first 4 cities in the dropdown are currently active
 // The rest are placeholders for now
+// Use this URL to make sure the API is working - http://api.openweathermap.org/data/2.5/weather?q=bozeman&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb
 
 
 import React from 'react';
@@ -19,24 +20,54 @@ export default class Dropdown1 extends React.Component {
       dropdownOpen: false,
       testVar:"placeholder",
       data:{
-          main:{
-              temp:"Loading...",
-              pressure:"Loading...",
-              humidity:"Loading..."
-          },
-          name:"Loading...",
-          clouds:{
-            all:"Loading..."
-          },
-          wind:{
-            speed:"Loading..."
-          },
-          dt:"Loading...",
-          weather:{
-            main:"Loading..."
-          }
+        coord:{
+          lon:"Loading...",
+          lat:"Loading..."
+        },
+        weather:{
+          id:"Loading...",
+          main:"Loading...",
+          description:"Loading...",
+          icon:"Loading...",
+        },
+        base:"Loading...",
+        main:{
+          temp:"Loading...",
+          pressure:"Loading...",
+          humidity:"Loading...",
+          temp_min:"Loading...",
+          temp_max:"Loading...",
+          sea_level:"Loading...",
+          grind_level:"Loading...",
+        },
+        wind:{
+          speed:"Loading...",
+          deg:"Loading...",
+        },
+        clouds:{
+          all:"Loading...",
+        },
+        //uses a number as the beginning of theobject name for rain and snow 3 hour volumes
+        //rain:{
+        //  3h:"Loading...",
+        //},
+        //snow:{
+        //  3h:"Loading...",
+        //},
+        dt:"Loading...",
+        sys:{
+          type:"Loading...",
+          id:"Loading...",
+          message:"Loading...",
+          country:"Loading...",
+          sunrise:"Loading...",
+          sunset:"Loading...",
+        },
+        id:"Loading...",
+        name:"Loading...",
+        cod:"Loading..."
       }
-    };
+    }
   }
 
   toggle() {
@@ -69,6 +100,7 @@ export default class Dropdown1 extends React.Component {
           <thead>
             <tr>
               <th>City</th>
+              <th>Weather</th>
               <th>Temp (F)</th>
               <th>Humidity (%)</th>
               <th>Cloud Cover (%)</th>
@@ -77,6 +109,7 @@ export default class Dropdown1 extends React.Component {
           <tbody>
             <tr>
               <td>{this.state.data.name}</td>
+              <td>{this.state.data.weather.main}</td>
               <td>{this.state.data.main.temp}</td>
               <td>{this.state.data.main.humidity}</td>
               <td>{this.state.data.clouds.all}</td>
@@ -85,6 +118,17 @@ export default class Dropdown1 extends React.Component {
         </Table>
         //somehow need to get rid of this
           this.componentDidMount()
+      }
+      for(var key in this.state.data){
+        if(!this.state.data[key]){
+          this.state.data[key] = "Unavailable"
+        } else {
+          for(var key2 in this.state.data[key]){
+            if(!this.state.data[key][key2]){
+              this.state.data[key][key2] = "Unavailable"
+            }
+          }
+        }
       }
     return (
         <div>
