@@ -24,7 +24,17 @@ export default class Dropdown1 extends React.Component {
               pressure:"Loading...",
               humidity:"Loading..."
           },
-          name:"Loading..."
+          name:"Loading...",
+          clouds:{
+            all:"Loading..."
+          },
+          wind:{
+            speed:"Loading..."
+          },
+          dt:"Loading...",
+          weather:{
+            main:"Loading..."
+          }
       }
     };
   }
@@ -50,17 +60,18 @@ export default class Dropdown1 extends React.Component {
   }
 
   render() {
-      if(this.state.data.main.temp != "Loading..."){
+      if(this.state.data.main.temp !== "Loading..."){
           this.state.data.main.temp = Math.floor((this.state.data.main.temp - 273.15)* 1.8000 + 32.00)
       }
-      if(this.state.testVar != "placeholder"){
+      if(this.state.testVar !== "placeholder"){
         //possily change this to this.setState in the future
           this.tableThing = <Table>
           <thead>
             <tr>
               <th>City</th>
-              <th>Temp</th>
-              <th>humidity</th>
+              <th>Temp (F)</th>
+              <th>Humidity (%)</th>
+              <th>Cloud Cover (%)</th>
             </tr>
           </thead>
           <tbody>
@@ -68,6 +79,7 @@ export default class Dropdown1 extends React.Component {
               <td>{this.state.data.name}</td>
               <td>{this.state.data.main.temp}</td>
               <td>{this.state.data.main.humidity}</td>
+              <td>{this.state.data.clouds.all}</td>
             </tr>
           </tbody>
         </Table>
@@ -85,7 +97,7 @@ export default class Dropdown1 extends React.Component {
           <DropdownItem header>City</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("anaconda")}>Anaconda</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("baker")}>Baker</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("chicago")}>Chicago (test)</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("bozeman")}>Chicago (test)</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("billings")}>Billings</DropdownItem>
           <DropdownItem>Boulder</DropdownItem>
           <DropdownItem>Bozeman</DropdownItem>
