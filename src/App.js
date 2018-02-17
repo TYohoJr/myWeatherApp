@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Jumbotron, Button } from 'reactstrap';
-import Shelter from "./shelter.js";
-import Weather from "./weather.js";
 import axios from "axios";
 import Dropdown1 from "./dropdown.js";
 
