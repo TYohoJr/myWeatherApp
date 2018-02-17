@@ -36,7 +36,7 @@ export default class Dropdown1 extends React.Component {
   }
 
   componentDidMount(){
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.testVar}&APPID=deb29dfd065c544e4164e76b251706d3`).then((response)=>{
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.testVar}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
           this.setState({
               data:response.data
           })
