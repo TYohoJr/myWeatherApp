@@ -1,3 +1,7 @@
+// Only the first 4 cities in the dropdown are currently active
+// The rest are placeholders for now
+
+
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./dropdown.css";
@@ -50,6 +54,7 @@ export default class Dropdown1 extends React.Component {
           this.state.data.main.temp = Math.floor((this.state.data.main.temp - 273.15)* 1.8000 + 32.00)
       }
       if(this.state.testVar != "placeholder"){
+        //possily change this to this.setState in the future
           this.tableThing = <Table>
           <thead>
             <tr>
@@ -66,6 +71,7 @@ export default class Dropdown1 extends React.Component {
             </tr>
           </tbody>
         </Table>
+        //somehow need to get rid of this
           this.componentDidMount()
       }
     return (
@@ -79,7 +85,7 @@ export default class Dropdown1 extends React.Component {
           <DropdownItem header>City</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("anaconda")}>Anaconda</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("baker")}>Baker</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("")}>Big Timber</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("chicago")}>Chicago (test)</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("billings")}>Billings</DropdownItem>
           <DropdownItem>Boulder</DropdownItem>
           <DropdownItem>Bozeman</DropdownItem>
