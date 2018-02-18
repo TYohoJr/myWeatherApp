@@ -6,7 +6,7 @@
 // Rebecca's API key - deb29dfd065c544e4164e76b251706d3 (do not use unless necessary)
 // Currently accesses the API more than it needs to, but no longer accesses it in an infinite loop :)
 // Currently it accesses the API twice for every city selected, and twice each timeyou open the dropdown menu(besides the first time on page load)
-
+// Remove Debugger on line 91 to test fully
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./dropdown.css";
@@ -21,7 +21,7 @@ export default class Dropdown1 extends React.Component {
     this.axiosGet = this.axiosGet.bind(this);    
     this.counter = 0;
     this.state = {
-      tableThing:"\ ",
+      tableThing:"",
       dropdownOpen: false,
       testVar:2,
 // This is the entire data tree from OpenWeatherApp
