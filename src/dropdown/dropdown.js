@@ -58,12 +58,12 @@ export default class Dropdown1 extends React.Component {
           all:"Loading...",
         },
 // Uses a number as the beginning of the object name for rain and snow 3 hour volumes
-//        rain:{
-//          3h:"Loading...",
-//        },
-//        snow:{
-//          3h:"Loading...",
-//        },
+        rain:{
+          h3h:"Loading...",
+        },
+        snow:{
+          h3h:"Loading...",
+        },
         dt:"Loading...",
         sys:{
           type:"Loading...",
@@ -92,17 +92,16 @@ export default class Dropdown1 extends React.Component {
       axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.testVar}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
         response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
         response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
-        debugger;
         this.setState({
           data:response.data,
-          tableThing: <Table>
+          tableThing: <Table className="tablething">
               <thead>
                 <tr>
-                  <th>City</th>
-                  <th>WindSpeed (mph)</th>
-                  <th>Temp (F)</th>
-                  <th>Humidity (%)</th>
-                  <th>Cloud Cover (%)</th>
+                  <th>City<br/></th>
+                  <th>WindSpeed<br/>(mph)</th>
+                  <th>Temp<br/>(F)</th>
+                  <th>Humidity<br/>(%)</th>
+                  <th>Cloud Cover<br/>(%)</th>
                 </tr>
               </thead>
               <tbody>
@@ -144,7 +143,7 @@ export default class Dropdown1 extends React.Component {
       this.tempImage = <img className="tempimage" src="https://cdn3.iconfinder.com/data/icons/weather-16/256/Cold_Day-256.png" alt="cold"/>
     }
 
-    if(this.state.data.wind.speed >= 3){
+    if(this.state.data.wind.speed >= 30){
       this.windImage = <img className="windimage" src="https://casebyscasebook.files.wordpress.com/2017/02/img_1706.jpg" alt="windy"/>
     }
 
@@ -165,16 +164,21 @@ export default class Dropdown1 extends React.Component {
         <DropdownMenu>
           <DropdownItem header>City</DropdownItem>
 {/*Need to change from citynames to city ID's*/}
+          <DropdownItem onClick={() => this.handleClick("missoula")}>Missoula</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("anaconda")}>Anaconda</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("baker")}>Baker</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("chicago")}>Chicago (test)</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("havre")}>Havre</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("billings")}>Billings</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("boulder")}>Boulder</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("bozeman")}>Bozeman</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("broadus")}>Broadus</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("helena")}>Helena</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("butte")}>Butte</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("")}>Great Falls</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("kalispell")}>Kalispell</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("chicago")}>Chicago (test)</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("miami")}>Miami (test)</DropdownItem>
         </DropdownMenu>
       </Dropdown>
+      <br/>
       <div>{this.state.tableThing}</div>
       <div>{this.windImage}{this.tempImage}{this.cloudImage}</div>
     </div>
