@@ -88,7 +88,6 @@ export default class Dropdown1 extends React.Component {
 
   axiosGet(){
     console.log("test2");
-// Need to change the format of the URL to accept either city Names or city ID's
       axios.get(`http://api.openweathermap.org/data/2.5/weather?${this.state.testVar}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
         response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
         response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
@@ -169,7 +168,6 @@ export default class Dropdown1 extends React.Component {
           </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>City</DropdownItem>
-{/*Need to change from citynames to city ID's*/}
           <DropdownItem onClick={() => this.handleClick("q=missoula")}>Missoula</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("q=anaconda")}>Anaconda</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("q=havre")}>Havre</DropdownItem>
