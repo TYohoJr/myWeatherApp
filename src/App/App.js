@@ -19,6 +19,7 @@ export default class App extends Component {
               <Dropdown1/>
             </div>
         </Jumbotron>
+{/*Need to figure out how to make this stick to the bottom*/}        
         <footer>
           <p>Created by: Thomas Yoho</p>
           <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Click Here</a> for the Secret to Life</p>
