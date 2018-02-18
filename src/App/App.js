@@ -11,6 +11,7 @@ export default class App extends Component {
   render() {
    return (
       <div>
+        <div className="main-content">
         <Jumbotron>
           <h1 className="main-header">Welcome to the Montana Weather App!</h1>
           <h5 className="sub-header">Select your Montana based city to get a local weather report!</h5>
@@ -19,6 +20,7 @@ export default class App extends Component {
               <Dropdown1/>
             </div>
         </Jumbotron>
+        </div>
 {/*Need to figure out how to make this stick to the bottom*/}        
         <footer>
           <p>Created by: Thomas Yoho</p>

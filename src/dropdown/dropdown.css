@@ -1,0 +1,18 @@
+
+.tempimage {
+    position: relative;
+    height:200px;
+    width:200px;
+}
+
+.cloudimage {
+    position:relative;
+    height:200px;
+    width:250px;
+}
+
+.windimage {
+    position:relative;
+    height:200px;
+    width:200px;
+}

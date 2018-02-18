@@ -20,6 +20,9 @@ export default class Dropdown1 extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.axiosGet = this.axiosGet.bind(this);    
     this.counter = 0;
+    this.tempImage = "";
+    this.cloudImage = "";
+    this.windImage = "";
     this.state = {
       tableThing:"",
       dropdownOpen: false,
@@ -88,6 +91,7 @@ export default class Dropdown1 extends React.Component {
 // Need to change the format of the URL to accept either city Names or city ID's
       axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.testVar}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
         response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
+        response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
         debugger;
         this.setState({
           data:response.data,
@@ -95,7 +99,7 @@ export default class Dropdown1 extends React.Component {
               <thead>
                 <tr>
                   <th>City</th>
-                  <th>Weather</th>
+                  <th>WindSpeed (mph)</th>
                   <th>Temp (F)</th>
                   <th>Humidity (%)</th>
                   <th>Cloud Cover (%)</th>
@@ -104,7 +108,8 @@ export default class Dropdown1 extends React.Component {
               <tbody>
                 <tr>
                   <td>{this.state.data.name}</td>
-                  <td>{this.state.data.weather.main}</td>
+{/*add formula to convert degrees to direction for wind*/}                  
+                  <td>{this.state.data.wind.speed}{/*, {this.state.data.wind.deg}*/}</td>
                   <td>{this.state.data.main.temp}</td>
                   <td>{this.state.data.main.humidity}</td>
                   <td>{this.state.data.clouds.all}</td>
@@ -130,18 +135,27 @@ export default class Dropdown1 extends React.Component {
     } else {
       this.counter = 0
     }
-// Need to somehow do this using setState instead of redefining the current object
-//      for(var key in this.state.data){
-//        if(!this.state.data[key]){
-//          this.state.data[key] = "Unavailable"
-//        } else {
-//          for(var key2 in this.state.data[key]){
-//            if(!this.state.data[key][key2]){
-//              this.state.data[key][key2] = "Unavailable"
-//            }
-//          }
-//        }
-//      }
+
+    if (this.state.data.main.temp >= 65){
+      this.tempImage = <img className="tempimage" src="http://www.computer-repair-stokeontrent.co.uk/images/computer-over-heating.png" alt="heat"/>
+    } else if (this.state.data.main.temp >= 32){
+      this.tempImage = <img className="tempimage" src="https://previews.123rf.com/images/pinanatreeangle/pinanatreeangle1707/pinanatreeangle170700005/81582186-temperature-icon-vector-clip-art-narrow-range-mercury-thermometer-shows-warm-weather.jpg" alt="medium temp"/>
+    } else if (this.state.data.main.temp < 32){
+      this.tempImage = <img className="tempimage" src="https://cdn3.iconfinder.com/data/icons/weather-16/256/Cold_Day-256.png" alt="cold"/>
+    }
+
+    if(this.state.data.wind.speed >= 3){
+      this.windImage = <img className="windimage" src="https://casebyscasebook.files.wordpress.com/2017/02/img_1706.jpg" alt="windy"/>
+    }
+
+    if (this.state.data.clouds.all >= 75){
+      this.cloudImage = <img className="cloudimage" src="http://www.clker.com/cliparts/s/E/z/g/z/V/cloud-md.png" alt="cloudy"/>
+    } else if (this.state.data.clouds.all >= 25){
+      this.cloudImage = <img className="cloudimage" src="https://www.goodfreephotos.com/albums/vector-images/sun-behind-the-clouds-vector-clipart.png" alt="partly cloudy"/>
+    } else if (this.state.data.clouds.all >= 0){
+      this.cloudImage = <img className="cloudimage" src="http://am1380.ca/wp-content/uploads/sun-1.png" alt="sunny"/>
+    }  
+
     return (
       <div>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -162,6 +176,7 @@ export default class Dropdown1 extends React.Component {
         </DropdownMenu>
       </Dropdown>
       <div>{this.state.tableThing}</div>
+      <div>{this.windImage}{this.tempImage}{this.cloudImage}</div>
     </div>
     );
   }
