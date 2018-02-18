@@ -6,7 +6,7 @@
 // Rebecca's API key - deb29dfd065c544e4164e76b251706d3 (do not use unless necessary)
 // Currently accesses the API more than it needs to, but no longer accesses it in an infinite loop :)
 // Currently it accesses the API twice for every city selected, and twice each timeyou open the dropdown menu(besides the first time on page load)
-// Remove Debugger on line 91 to test fully
+
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./dropdown.css";
@@ -58,12 +58,12 @@ export default class Dropdown1 extends React.Component {
           all:"Loading...",
         },
 // Uses a number as the beginning of the object name for rain and snow 3 hour volumes
-        rain:{
-          h3h:"Loading...",
-        },
-        snow:{
-          h3h:"Loading...",
-        },
+//        rain:{
+//          3h:"Loading...",
+//        },
+//        snow:{
+//          3h:"Loading...",
+//        },
         dt:"Loading...",
         sys:{
           type:"Loading...",
@@ -89,7 +89,7 @@ export default class Dropdown1 extends React.Component {
   axiosGet(){
     console.log("test2");
 // Need to change the format of the URL to accept either city Names or city ID's
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.testVar}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?${this.state.testVar}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
         response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
         response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
         this.setState({
@@ -122,6 +122,12 @@ export default class Dropdown1 extends React.Component {
   handleClick(somecityy) {
     this.setState({
       testVar:somecityy
+    })
+  }
+
+  zipInput(input) {
+    this.setState({
+      testVar:`zip=${input}`
     })
   }
 
@@ -164,20 +170,24 @@ export default class Dropdown1 extends React.Component {
         <DropdownMenu>
           <DropdownItem header>City</DropdownItem>
 {/*Need to change from citynames to city ID's*/}
-          <DropdownItem onClick={() => this.handleClick("missoula")}>Missoula</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("anaconda")}>Anaconda</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("havre")}>Havre</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("billings")}>Billings</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("boulder")}>Boulder</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("bozeman")}>Bozeman</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("helena")}>Helena</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("butte")}>Butte</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("")}>Great Falls</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("kalispell")}>Kalispell</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("chicago")}>Chicago (test)</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("miami")}>Miami (test)</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=missoula")}>Missoula</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=anaconda")}>Anaconda</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=havre")}>Havre</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=billings")}>Billings</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=boulder")}>Boulder</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=bozeman")}>Bozeman</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=helena")}>Helena</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=butte")}>Butte</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=5655240")}>Great Falls</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=kalispell")}>Kalispell</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=chicago")}>Chicago (test)</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("q=miami")}>Miami (test)</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("zip=60565")}>ZIP 60565 (test)</DropdownItem>
         </DropdownMenu>
       </Dropdown>
+      <br/>
+      <div>Or enter your 5-digit Zip Code<br/>(does not have to be Montana based)</div>
+      <input id="zipCode" type="text" placeholder="Zip Code"/><button onClick={() => this.zipInput(document.getElementById('zipCode').value)}>Submit</button><br/>
       <br/>
       <div>{this.state.tableThing}</div>
       <div>{this.windImage}{this.tempImage}{this.cloudImage}</div>
