@@ -7,9 +7,14 @@ h5 {
 }
 
 footer {
-  text-align:center
+  text-align:center;
+  font-size: 12px
 }
 
 .dropdown {
   text-align:center
 }
+
+/*.main-content {
+  padding-bottom:120px
+}*/

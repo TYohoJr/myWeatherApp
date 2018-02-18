@@ -9,28 +9,25 @@ export default class App extends Component {
     super();
   }
   render() {
-    return (
-        <div>
-          <Jumbotron>
-            <h1 className="main-header">Welcome to the Montana Weather App!</h1>
-            <h5 className="sub-header">Select your Montana based city to get a local weather report!</h5>
+   return (
+      <div>
+        <div className="main-content">
+        <Jumbotron>
+          <h1 className="main-header">Welcome to the Montana Weather App!</h1>
+          <h5 className="sub-header">Select your Montana based city to get a local weather report!</h5>
             <hr/>
-            {/*<p className="lead">
-              <Button color="primary">Learn More</Button>
-    </p>*/}
             <div className="dropdown">
               <Dropdown1/>
             </div>
-          </Jumbotron>
-        <div>
-          {/*<Weather/>*/}
+        </Jumbotron>
         </div>
+{/*Need to figure out how to make this stick to the bottom*/}        
         <footer>
           <p>Created by: Thomas Yoho</p>
-          <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-          Click Here</a> for the Secret to Life</p>
+          <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Click Here</a> for the Secret to Life</p>
+          <p>Weather data from OpenWeatherMap</p>
         </footer>
-        </div>
+      </div>
     )
   }
 }
