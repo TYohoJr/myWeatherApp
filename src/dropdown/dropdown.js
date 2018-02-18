@@ -1,7 +1,6 @@
-// Only the first 4 cities in the dropdown are currently active
+// More cities will be added later
 // The rest are placeholders for now
 // Use this URL to make sure the API is working - http://api.openweathermap.org/data/2.5/weather?q=bozeman&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb
-//testing
 
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -76,8 +75,9 @@ export default class Dropdown1 extends React.Component {
   }
 
   componentDidMount(){
+// Need to change the format of the URL to accept either city Names or city ID's
       axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.testVar}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
-        response.data.main.temp = Math.floor((this.state.data.main.temp - 273.15)* 1.8000 + 32.00)
+        response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
         this.setState({
           data:response.data
         })
@@ -138,34 +138,15 @@ export default class Dropdown1 extends React.Component {
         <DropdownMenu>
 {/*Some way to automate making this dropdownlist?*/}
           <DropdownItem header>City</DropdownItem>
+{/*Need to change from citynames to city ID's*/}
           <DropdownItem onClick={() => this.handleClick("anaconda")}>Anaconda</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("baker")}>Baker</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("bozeman")}>Chicago (test)</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("chicago")}>Chicago (test)</DropdownItem>
           <DropdownItem onClick={() => this.handleClick("billings")}>Billings</DropdownItem>
-          <DropdownItem>Boulder</DropdownItem>
-          <DropdownItem>Bozeman</DropdownItem>
-          <DropdownItem>Broadus</DropdownItem>
-          <DropdownItem>Butte</DropdownItem>
-          <DropdownItem>Chester</DropdownItem>
-          <DropdownItem>Chinook</DropdownItem>
-          <DropdownItem>Choteau</DropdownItem>
-          <DropdownItem>Circle</DropdownItem>
-          <DropdownItem>Columbus</DropdownItem>
-          <DropdownItem>Conrad</DropdownItem>
-          <DropdownItem>Cut Bank</DropdownItem>
-          <DropdownItem>Deer Lodge</DropdownItem>
-          <DropdownItem>Dillon</DropdownItem>
-          <DropdownItem>Ekalaka</DropdownItem>
-          <DropdownItem>Forsyth</DropdownItem>
-          <DropdownItem>Fort Benton</DropdownItem>
-          <DropdownItem>Glasgow</DropdownItem>
-          <DropdownItem>Glendive</DropdownItem>
-          <DropdownItem>Great Falls</DropdownItem>
-          <DropdownItem>Hamilton</DropdownItem>
-          <DropdownItem>Hardin</DropdownItem>
-          <DropdownItem>Harlowtown</DropdownItem>
-          <DropdownItem>Havre</DropdownItem>
-          <DropdownItem>Helena</DropdownItem>  
+          <DropdownItem onClcik={() => this.handleClick("boulder")}>Boulder</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("bozeman")}>Bozeman</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("broadus")}>Broadus</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("butte")}>Butte</DropdownItem>
         </DropdownMenu>
       </Dropdown>
       <p>{this.tableThing}</p>
