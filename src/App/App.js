@@ -10,9 +10,9 @@ export default class App extends Component {
   }
   render() {
    return (
-      <div>
+      <div className="main-body">
         <div className="main-content">
-        <Jumbotron>
+        <Jumbotron className="jumbotron-main">
           <h1 className="main-header">Welcome to the Montana Weather App!</h1>
           <h5 className="sub-header">Select your Montana based city to get a local weather report!</h5>
             <hr/>
