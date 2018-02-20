@@ -79,7 +79,7 @@ export default class Dropdown1 extends React.Component {
       }
     }
   }
-
+//test if i can make this not set state to prevent additional API pulls
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
