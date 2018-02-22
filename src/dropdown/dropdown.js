@@ -1,7 +1,6 @@
 // Limit testing/saving whileserver is runnng to avoid API request lockouts
 // Use this URL to make sure the API is working - http://api.openweathermap.org/data/2.5/weather?q=bozeman&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb
 // My API key - df763ac8b1b29ebbbf6e5d41aa8d44eb
-// Random persons API key - bd5e378503939ddaee76f12ad7a97608
 
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -14,9 +13,6 @@ export default class Dropdown1 extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.handleClick = this.handleClick.bind(this);  
-    this.tempImage = "";
-    this.cloudImage = "";
-    this.windImage = "";
     this.state = {
       dropdownOpen: false,
       testVar:2,
@@ -79,7 +75,7 @@ export default class Dropdown1 extends React.Component {
   }
   
   handleClick(input) {
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?${input}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?${input}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
       response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
       response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
       this.setState({
@@ -89,7 +85,7 @@ export default class Dropdown1 extends React.Component {
   }
 
   zipInput(input) {
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${input}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${input}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
       response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
       response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
       this.setState({
@@ -160,24 +156,26 @@ export default class Dropdown1 extends React.Component {
       </Table>
     }
 
+    var tempImage
     if (this.state.data.main.temp >= 65){
-      this.tempImage = <img className="tempimage" src="http://www.computer-repair-stokeontrent.co.uk/images/computer-over-heating.png" alt="heat"/>
+      tempImage = <img className="tempimage" src="http://www.computer-repair-stokeontrent.co.uk/images/computer-over-heating.png" alt="heat"/>
     } else if (this.state.data.main.temp >= 32){
-      this.tempImage = <img className="tempimage" src="https://previews.123rf.com/images/pinanatreeangle/pinanatreeangle1707/pinanatreeangle170700005/81582186-temperature-icon-vector-clip-art-narrow-range-mercury-thermometer-shows-warm-weather.jpg" alt="medium temp"/>
+      tempImage = <img className="tempimage" src="https://previews.123rf.com/images/pinanatreeangle/pinanatreeangle1707/pinanatreeangle170700005/81582186-temperature-icon-vector-clip-art-narrow-range-mercury-thermometer-shows-warm-weather.jpg" alt="medium temp"/>
     } else if (this.state.data.main.temp < 32){
-      this.tempImage = <img className="tempimage" src="https://cdn3.iconfinder.com/data/icons/weather-16/256/Cold_Day-256.png" alt="cold"/>
+      tempImage = <img className="tempimage" src="https://cdn3.iconfinder.com/data/icons/weather-16/256/Cold_Day-256.png" alt="cold"/>
     }
 
     if(this.state.data.wind.speed >= 30){
-      this.windImage = <img className="windimage" src="https://casebyscasebook.files.wordpress.com/2017/02/img_1706.jpg" alt="windy"/>
+      var windImage = <img className="windimage" src="https://casebyscasebook.files.wordpress.com/2017/02/img_1706.jpg" alt="windy"/>
     }
 
+    var cloudImage;
     if (this.state.data.clouds.all >= 75){
-      this.cloudImage = <img className="cloudimage" src="http://www.clker.com/cliparts/s/E/z/g/z/V/cloud-md.png" alt="cloudy"/>
+      cloudImage = <img className="cloudimage" src="http://www.clker.com/cliparts/s/E/z/g/z/V/cloud-md.png" alt="cloudy"/>
     } else if (this.state.data.clouds.all >= 25){
-      this.cloudImage = <img className="cloudimage" src="https://www.goodfreephotos.com/albums/vector-images/sun-behind-the-clouds-vector-clipart.png" alt="partly cloudy"/>
+      cloudImage = <img className="cloudimage" src="https://www.goodfreephotos.com/albums/vector-images/sun-behind-the-clouds-vector-clipart.png" alt="partly cloudy"/>
     } else if (this.state.data.clouds.all >= 0){
-      this.cloudImage = <img className="cloudimage" src="http://am1380.ca/wp-content/uploads/sun-1.png" alt="sunny"/>
+      cloudImage = <img className="cloudimage" src="http://am1380.ca/wp-content/uploads/sun-1.png" alt="sunny"/>
     }  
 
     return (
@@ -213,7 +211,7 @@ export default class Dropdown1 extends React.Component {
         {tableThing}
       </div>
       <div>
-        {this.windImage}{this.tempImage}{this.cloudImage}
+        {windImage}{tempImage}{cloudImage}
       </div>
     </div>
     )
