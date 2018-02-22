@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Jumbotron, Button } from 'reactstrap';
-import axios from "axios";
+import { Jumbotron } from 'reactstrap';
 import Dropdown1 from "../dropdown/dropdown.js";
 
 export default class App extends Component {
-  constructor(){
-    super();
-  }
   render() {
    return (
       <div className="main-body">
@@ -23,7 +19,7 @@ export default class App extends Component {
         </div>      
         <footer>
           <p>Created by: Thomas Yoho</p>
-          <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Click Here</a> for the Secret to Life</p>
+          <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer">Click Here</a> for the Secret to Life</p>
           <p>Weather data from OpenWeatherMap</p>
         </footer>
       </div>

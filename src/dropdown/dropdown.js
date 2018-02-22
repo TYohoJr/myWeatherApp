@@ -1,11 +1,7 @@
-// More cities will be added later
 // Limit testing/saving whileserver is runnng to avoid API request lockouts
 // Use this URL to make sure the API is working - http://api.openweathermap.org/data/2.5/weather?q=bozeman&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb
 // My API key - df763ac8b1b29ebbbf6e5d41aa8d44eb
 // Random persons API key - bd5e378503939ddaee76f12ad7a97608
-// Rebecca's API key - deb29dfd065c544e4164e76b251706d3 (do not use unless necessary)
-// Currently accesses the API more than it needs to, but no longer accesses it in an infinite loop :)
-// Currently it accesses the API twice for every city selected, and twice each timeyou open the dropdown menu(besides the first time on page load)
 
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -17,14 +13,11 @@ export default class Dropdown1 extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.axiosGet = this.axiosGet.bind(this);    
-    this.counter = 0;
+    this.handleClick = this.handleClick.bind(this);  
     this.tempImage = "";
     this.cloudImage = "";
     this.windImage = "";
     this.state = {
-      tableThing:"",
       dropdownOpen: false,
       testVar:2,
 // This is the entire data tree from OpenWeatherApp
@@ -57,13 +50,12 @@ export default class Dropdown1 extends React.Component {
         clouds:{
           all:"Loading...",
         },
-// Uses a number as the beginning of the object name for rain and snow 3 hour volumes
-//        rain:{
-//          3h:"Loading...",
-//        },
-//        snow:{
-//          3h:"Loading...",
-//        },
+      //  rain:{
+      //    ["3h"]:"Loading...",
+      //  },
+      //  snow:{
+      //    ["3h"]:"Loading...",
+      //  },
         dt:"Loading...",
         sys:{
           type:"Loading...",
@@ -79,65 +71,93 @@ export default class Dropdown1 extends React.Component {
       }
     }
   }
-//test if i can make this not set state to prevent additional API pulls
+
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-
-  axiosGet(){
-    console.log("test2");
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?${this.state.testVar}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
-        response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
-        response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
-        this.setState({
-          data:response.data,
-          tableThing: <Table className="tablething">
-              <thead>
-                <tr>
-                  <th>City<br/></th>
-                  <th>WindSpeed<br/>(mph)</th>
-                  <th>Temp<br/>(F)</th>
-                  <th>Humidity<br/>(%)</th>
-                  <th>Cloud Cover<br/>(%)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{this.state.data.name}</td>
-{/*add formula to convert degrees to direction for wind*/}                  
-                  <td>{this.state.data.wind.speed}{/*, {this.state.data.wind.deg}*/}</td>
-                  <td>{this.state.data.main.temp}</td>
-                  <td>{this.state.data.main.humidity}</td>
-                  <td>{this.state.data.clouds.all}</td>
-                </tr>
-              </tbody>
-            </Table>
-      })
-    })
-  }
   
-  handleClick(somecityy) {
-    this.setState({
-      testVar:somecityy
+  handleClick(input) {
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?${input}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
+      response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
+      response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
+      this.setState({
+        data:response.data,
+      })
     })
   }
 
   zipInput(input) {
-    this.setState({
-      testVar:`zip=${input}`
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${input}&APPID=bd5e378503939ddaee76f12ad7a97608`).then((response)=>{
+      response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
+      response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
+      this.setState({
+        data:response.data,
+      })
     })
   }
 
   render() {
-// Surely there is a way to stop inifinite loops here without a counter...    
-    if ((typeof this.state.testVar !== "number") && this.counter < 2){
-      this.counter = this.counter + 1;
-      this.axiosGet()
-// This lets the user change what city they pick
-    } else {
-      this.counter = 0
+    if (this.state.data.main.temp !== "Loading..."){
+      var windDeg;
+        if (this.state.data.wind.deg>11.25 && this.state.data.wind.deg<33.75){
+          windDeg = "NNE";
+        }else if (this.state.data.wind.deg>33.75 && this.state.data.wind.deg<56.25){
+          windDeg = "ENE";
+        }else if (this.state.data.wind.deg>56.25 && this.state.data.wind.deg<78.75){
+          windDeg = "E";
+        }else if (this.state.data.wind.deg>78.75 && this.state.data.wind.deg<101.25){
+          windDeg = "ESE";
+        }else if (this.state.data.wind.deg>101.25 && this.state.data.wind.deg<123.75){
+          windDeg = "ESE";
+        }else if (this.state.data.wind.deg>123.75 && this.state.data.wind.deg<146.25){
+          windDeg = "SE";
+        }else if (this.state.data.wind.deg>146.25 && this.state.data.wind.deg<168.75){
+          windDeg = "SSE";
+        }else if (this.state.data.wind.deg>168.75 && this.state.data.wind.deg<191.25){
+          windDeg = "S";
+        }else if (this.state.data.wind.deg>191.25 && this.state.data.wind.deg<213.75){
+          windDeg = "SSW";
+        }else if (this.state.data.wind.deg>213.75 && this.state.data.wind.deg<236.25){
+          windDeg = "SW";
+        }else if (this.state.data.wind.deg>236.25 && this.state.data.wind.deg<258.75){
+          windDeg = "WSW";
+        }else if (this.state.data.wind.deg>258.75 && this.state.data.wind.deg<281.25){
+          windDeg = "W";
+        }else if (this.state.data.wind.deg>281.25 && this.state.data.wind.deg<303.75){
+          windDeg = "WNW";
+        }else if (this.state.data.wind.deg>303.75 && this.state.data.wind.deg<326.25){
+          windDeg = "NW";
+        }else if (this.state.data.wind.deg>326.25 && this.state.data.wind.deg<348.75){
+          windDeg = "NNW";
+        }else{
+          windDeg = "N"; 
+        }
+      var tableThing =
+      <Table className="tablething">
+        <thead>
+          <tr>
+            <th>City<br/></th>
+            <th>Wind Speed<br/>(mph)</th>
+            <th>Wind Direction</th>
+            <th>Temp<br/>(F)</th>
+            <th>Humidity<br/>(%)</th>
+            <th>Cloud Cover<br/>(%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{this.state.data.name}</td>
+{/*add formula to convert degrees to direction for wind*/}                  
+            <td>{this.state.data.wind.speed}</td>
+            <td>{windDeg}</td>
+            <td>{this.state.data.main.temp}</td>
+            <td>{this.state.data.main.humidity}</td>
+            <td>{this.state.data.clouds.all}</td>
+          </tr>
+        </tbody>
+      </Table>
     }
 
     if (this.state.data.main.temp >= 65){
@@ -184,12 +204,18 @@ export default class Dropdown1 extends React.Component {
         </DropdownMenu>
       </Dropdown>
       <br/>
-      <div>Or enter your 5-digit Zip Code<br/>(does not have to be Montana based)</div>
+      <div>
+        Or enter your 5-digit Zip Code<br/>(does not have to be Montana based)
+      </div>
       <input id="zipCode" type="text" placeholder="Zip Code"/><button onClick={() => this.zipInput(document.getElementById('zipCode').value)}>Submit</button><br/>
       <br/>
-      <div>{this.state.tableThing}</div>
-      <div>{this.windImage}{this.tempImage}{this.cloudImage}</div>
+      <div>
+        {tableThing}
+      </div>
+      <div>
+        {this.windImage}{this.tempImage}{this.cloudImage}
+      </div>
     </div>
-    );
+    )
   }
 }
