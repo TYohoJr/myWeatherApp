@@ -25,3 +25,8 @@ tr, th, td, thead, tbody {
     border:3px solid black;
     text-align: center;
 }
+
+.dropdown-menu.show {
+    height: 300px;
+    overflow: scroll;
+}

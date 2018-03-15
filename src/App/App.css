@@ -6,13 +6,26 @@ h5 {
   text-align:center
 }
 
-footer {
-  text-align:center; 
-  bottom: 0px;
-  font-size: 12px;
-  width:100%;
-}
-
 .dropdown {
   text-align:center
+}
+
+footer {
+  text-align: center;
+  height:80px;
+  width: 100%;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  position: fixed;
+  bottom: 0pt;
+  left: 0pt;
+  opacity: .6;
+}
+
+.footer-contents {
+  height:24px;
+  width: 100%;
+  margin:auto;
 }
