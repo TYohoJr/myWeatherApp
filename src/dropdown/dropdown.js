@@ -75,7 +75,7 @@ export default class Dropdown1 extends React.Component {
   }
   
   handleClick(input) {
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?${input}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?${input}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
       response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
       response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
       this.setState({
@@ -85,7 +85,7 @@ export default class Dropdown1 extends React.Component {
   }
 
   zipInput(input) {
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${input}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${input}&APPID=df763ac8b1b29ebbbf6e5d41aa8d44eb`).then((response)=>{
       response.data.main.temp = Math.floor((response.data.main.temp - 273.15)* 1.8000 + 32.00)
       response.data.wind.speed = Math.floor(response.data.wind.speed * 2.2369);
       this.setState({
@@ -158,7 +158,7 @@ export default class Dropdown1 extends React.Component {
 
     var tempImage
     if (this.state.data.main.temp >= 65){
-      tempImage = <img className="tempimage" src="http://www.computer-repair-stokeontrent.co.uk/images/computer-over-heating.png" alt="heat"/>
+      tempImage = <img className="tempimage" src="https://www.computer-repair-stokeontrent.co.uk/images/computer-over-heating.png" alt="heat"/>
     } else if (this.state.data.main.temp >= 32){
       tempImage = <img className="tempimage" src="https://previews.123rf.com/images/pinanatreeangle/pinanatreeangle1707/pinanatreeangle170700005/81582186-temperature-icon-vector-clip-art-narrow-range-mercury-thermometer-shows-warm-weather.jpg" alt="medium temp"/>
     } else if (this.state.data.main.temp < 32){
@@ -171,7 +171,7 @@ export default class Dropdown1 extends React.Component {
 
     var cloudImage;
     if (this.state.data.clouds.all >= 75){
-      cloudImage = <img className="cloudimage" src="http://www.clker.com/cliparts/s/E/z/g/z/V/cloud-md.png" alt="cloudy"/>
+      cloudImage = <img className="cloudimage" src="https://www.clker.com/cliparts/s/E/z/g/z/V/cloud-md.png" alt="cloudy"/>
     } else if (this.state.data.clouds.all >= 25){
       cloudImage = <img className="cloudimage" src="https://www.goodfreephotos.com/albums/vector-images/sun-behind-the-clouds-vector-clipart.png" alt="partly cloudy"/>
     } else if (this.state.data.clouds.all >= 0){
