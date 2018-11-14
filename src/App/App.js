@@ -9,8 +9,8 @@ export default class App extends Component {
       <div className="main-body">
         <div className="main-content">
           <Jumbotron className="jumbotron-main">
-            <h1 className="main-header">Welcome to the Montana Weather App!</h1>
-            <h5 className="sub-header">Select your Montana based city to get a local weather report!</h5>
+            <h1 className="main-header">Welcome to Your Local Weather App!</h1>
+            <h5 className="sub-header">Select a major city or enter your 5 digit zip code</h5>
             <hr />
             <div className="dropdown">
               <Dropdown1 />

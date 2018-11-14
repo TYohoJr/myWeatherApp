@@ -182,7 +182,7 @@ export default class Dropdown1 extends React.Component {
       <div>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
-            Dropdown
+            Select City
           </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>City</DropdownItem>
@@ -202,9 +202,6 @@ export default class Dropdown1 extends React.Component {
         </DropdownMenu>
       </Dropdown>
       <br/>
-      <div>
-        Or enter your 5-digit Zip Code<br/>(does not have to be Montana based)
-      </div>
       <input id="zipCode" type="text" placeholder="Zip Code"/><button onClick={() => this.zipInput(document.getElementById('zipCode').value)}>Submit</button><br/>
       <br/>
       <div>
