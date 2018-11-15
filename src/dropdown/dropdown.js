@@ -182,23 +182,23 @@ export default class Dropdown1 extends React.Component {
       <div>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
-            Select City
+            Select Major City
           </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem header>City</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=missoula")}>Missoula</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=anaconda")}>Anaconda</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=havre")}>Havre</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=billings")}>Billings</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=boulder")}>Boulder</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=bozeman")}>Bozeman</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=helena")}>Helena</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=butte")}>Butte</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("id=5655240")}>Great Falls</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=kalispell")}>Kalispell</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=chicago")}>Chicago (test)</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("q=miami")}>Miami (test)</DropdownItem>
-          <DropdownItem onClick={() => this.handleClick("zip=60565")}>ZIP 60565 (test)</DropdownItem>
+          <DropdownItem header>City, State</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=5128581")}>New York, NY</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=5368361")}>Los Angeles, CA</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=4887398")}>Chicago, IL</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=4699066")}>Houston, TX</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=4560349")}>Philadelphia, PA</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=5308655")}>Phoenix, AZ</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=4726206")}>San Antonio, TX</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=5391811")}>San Diego, CA</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=4684888")}>Dallas, TX</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=5809844")}>Seattle, WA</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=4671654")}>Austin, TX</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=4160021")}>Jacksonville, FL</DropdownItem>
+          <DropdownItem onClick={() => this.handleClick("id=5391959")}>San Francisco, CA</DropdownItem>
         </DropdownMenu>
       </Dropdown>
       <br/>
